@@ -18,7 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JwtSecurityConfig {
 
     static final List<String> OPEN_ENDPOINT_LIST = Arrays.asList(
-        "/api/auth"
+        "/api/auth",
+        "/v2/api-docs",
+        "/v2/swagger-ui/index.html"
     );
     
     @Bean
@@ -30,7 +32,10 @@ public class JwtSecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests()
-            .antMatchers(OPEN_ENDPOINT_LIST.get(0))
+            .antMatchers(
+                OPEN_ENDPOINT_LIST.get(0),
+                OPEN_ENDPOINT_LIST.get(1)
+            )
             .permitAll()
             .anyRequest()
             .authenticated()

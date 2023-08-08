@@ -15,6 +15,9 @@ import com.api.innovation.application.deliveries.usecases.CreateDeliveryUseCase;
 import com.api.innovation.infra.databases.hibernate.deliveries.models.Delivery;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/deliveries")
 public class CreateDeliveryController {
@@ -24,6 +27,10 @@ public class CreateDeliveryController {
 		this.createDeliveryUseCase = createDeliveryUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Recurso criado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
     @PostMapping
 	public ResponseEntity<DeliveryDTO> execute(@RequestBody @Valid DeliveryCreateDTO deliveryCreateDTO) {
 		try {

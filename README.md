@@ -13,6 +13,8 @@
 
 <br>
 
+
+# Swagger: http://localhost:8080/v2/api-docs
 ## Endpoints
 
 ### 1 - [POST] /api/auth 

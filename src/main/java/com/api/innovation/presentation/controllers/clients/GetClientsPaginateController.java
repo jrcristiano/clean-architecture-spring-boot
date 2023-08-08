@@ -11,6 +11,9 @@ import com.api.innovation.application.clients.usecases.GetClientsPaginateUseCase
 import com.api.innovation.infra.databases.hibernate.clients.models.Client;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/clients")
 public class GetClientsPaginateController {
@@ -20,6 +23,9 @@ public class GetClientsPaginateController {
 		this.getClientsPaginateUseCase = getClientsPaginateUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Retorna a lista de dados"),
+    })
 	@GetMapping
 	public Page<ClientDTO> execute(
 		@RequestParam(name = "page", required = false, defaultValue = "1") String page,

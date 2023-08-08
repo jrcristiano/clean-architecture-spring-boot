@@ -16,6 +16,9 @@ import com.api.innovation.application.deliveries.usecases.UpdateDeliveryByIdUseC
 import com.api.innovation.infra.databases.hibernate.deliveries.models.Delivery;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/deliveries")
 public class UpdateDeliveryByIdController {
@@ -25,6 +28,10 @@ public class UpdateDeliveryByIdController {
         this.updateDeliveryByIdUseCase = updateDeliveryByIdUseCase;
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Recurso atualizado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
     @PutMapping("/{id}")
     public ResponseEntity<DeliveryRequestDTO> execute(
         @PathVariable("id") Long id, @RequestBody @Valid DeliveryUpdateDTO deliveryUpdateDTO

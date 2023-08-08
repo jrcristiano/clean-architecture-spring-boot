@@ -15,6 +15,9 @@ import com.api.innovation.application.clients.usecases.CreateClientUseCase;
 import com.api.innovation.infra.databases.hibernate.clients.models.Client;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/clients")
 public class CreateClientController {
@@ -24,6 +27,10 @@ public class CreateClientController {
 		this.createClientUseCase = createClientUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Recurso criado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
 	@PostMapping
 	public ResponseEntity<ClientDTO> execute(@RequestBody @Valid ClientCreateDTO clientCreateDTO) {
 		try {

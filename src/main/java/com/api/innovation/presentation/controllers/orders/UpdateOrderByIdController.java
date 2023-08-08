@@ -16,6 +16,9 @@ import com.api.innovation.application.orders.usecases.UpdateOrderByIdUseCase;
 import com.api.innovation.infra.databases.hibernate.orders.models.Order;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/orders")
 public class UpdateOrderByIdController {
@@ -25,6 +28,10 @@ public class UpdateOrderByIdController {
 		this.UpdateOrderByIdUseCase = UpdateOrderByIdUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Recurso atualizado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
 	@PutMapping("/{id}")
 	public ResponseEntity<OrderRequestDTO> execute(
 		@PathVariable("id") Long id, @RequestBody @Valid OrderUpdateDTO orderUpdateDTO

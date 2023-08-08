@@ -15,6 +15,9 @@ import com.api.innovation.application.orders.usecases.CreateOrderUseCase;
 import com.api.innovation.infra.databases.hibernate.orders.models.Order;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/orders")
 public class CreateOrderController {
@@ -24,6 +27,10 @@ public class CreateOrderController {
 		this.createOrderUseCase = createOrderUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Recurso criado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
     @PostMapping
 	public ResponseEntity<OrderDTO> execute(@RequestBody @Valid OrderCreateDTO orderCreateDTO) {
 		try {

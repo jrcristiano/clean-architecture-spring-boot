@@ -16,6 +16,9 @@ import com.api.innovation.application.clients.usecases.UpdateClientByIdUseCase;
 import com.api.innovation.infra.databases.hibernate.clients.models.Client;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/clients")
 public class UpdateClientByIdController {
@@ -25,6 +28,10 @@ public class UpdateClientByIdController {
 		this.updateClientByIdUseCase = updateClientByIdUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Recurso atualizado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
 	@PutMapping("/{id}")
 	public ResponseEntity<ClientRequestDTO> execute(
 		@PathVariable("id") Long id, @RequestBody @Valid ClientUpdateDTO clientUpdateDTO

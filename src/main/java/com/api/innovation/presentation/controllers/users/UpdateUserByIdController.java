@@ -14,6 +14,9 @@ import com.api.innovation.application.users.usecases.UpdateUserByIdUseCase;
 import com.api.innovation.infra.databases.hibernate.users.models.User;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.validation.Valid;
 
 @RestController
@@ -25,6 +28,10 @@ public class UpdateUserByIdController {
 		this.updateUserByIdUseCase = updateUserByIdUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Recurso atualizado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
 	@PutMapping("/{id}")
 	public ResponseEntity<UserRequestDTO> execute(
 		@PathVariable("id") Long id, @RequestBody @Valid UserUpdateDTO userUpdateDTO

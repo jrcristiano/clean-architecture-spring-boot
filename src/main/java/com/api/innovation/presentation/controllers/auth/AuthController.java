@@ -13,6 +13,9 @@ import com.api.innovation.application.auth.usecases.AuthUserUseCase;
 import com.api.innovation.infra.config.security.token.AuthToken;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController()
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -23,6 +26,10 @@ public class AuthController {
         this.authUserUseCase = authUserUseCase;
     }
     
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Retorna a lista de dados"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
     @PostMapping()
     public ResponseEntity<AuthToken> authenticate(@RequestBody @Valid AuthDTO authDTO) {
         try {

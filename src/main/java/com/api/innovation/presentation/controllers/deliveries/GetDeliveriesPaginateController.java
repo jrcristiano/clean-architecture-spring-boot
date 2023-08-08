@@ -11,6 +11,9 @@ import com.api.innovation.application.deliveries.usecases.GetDeliveriesPaginateU
 import com.api.innovation.infra.databases.hibernate.deliveries.models.Delivery;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/deliveries")
 public class GetDeliveriesPaginateController {
@@ -20,6 +23,9 @@ public class GetDeliveriesPaginateController {
         this.getDeliveriesPaginateUseCase = getDeliveriesPaginateUseCase;
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Retorna a lista de dados"),
+    })
     @GetMapping
     public Page<DeliveryDTO> execute(
             @RequestParam(name = "page", required = false, defaultValue = "1") String page,

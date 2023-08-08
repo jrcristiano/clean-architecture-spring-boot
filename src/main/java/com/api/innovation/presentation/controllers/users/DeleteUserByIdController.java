@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.innovation.application.users.usecases.DeleteUserByIdUseCase;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/users")
 public class DeleteUserByIdController {
@@ -20,6 +23,10 @@ public class DeleteUserByIdController {
 		this.deleteUserByIdUseCase = deleteUserByIdUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 204, message = "Sem conteúdo"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> execute(@PathVariable("id") Long id) {
 		try {

@@ -11,6 +11,9 @@ import com.api.innovation.application.orders.usecases.GetOrdersPaginateUseCase;
 import com.api.innovation.infra.databases.hibernate.orders.models.Order;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/orders")
 public class GetOrdersPaginateController {
@@ -21,6 +24,9 @@ public class GetOrdersPaginateController {
 		this.getOrdersPaginateUseCase = getOrdersPaginateUseCase;
 	}
     
+	@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Retorna a lista de dados"),
+    })
     @GetMapping
 	public Page<OrderDTO> execute(
 		@RequestParam(name = "page", required = false, defaultValue = "1") String page,

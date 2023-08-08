@@ -13,6 +13,9 @@ import com.api.innovation.application.users.usecases.CreateUserUseCase;
 import com.api.innovation.infra.databases.hibernate.users.models.User;
 import com.api.innovation.infra.handlers.exceptions.InternalServerErrorException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.validation.Valid;
 
 @RestController
@@ -24,6 +27,10 @@ public class CreateUserController {
 		this.createUserUseCase = createUserUseCase;
 	}
 
+	@ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Recurso criado com sucesso"),
+        @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
 	@PostMapping
 	public ResponseEntity<UserDTO> execute(@RequestBody @Valid UserCreateDTO userCreateDTO) {
 		try {
